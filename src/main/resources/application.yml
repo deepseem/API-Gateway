@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: auth-service
+              uri: http://localhost:8081
+              predicates:
+                - Path=/auth/**
+
+            - id: student-service
+              uri: http://localhost:8082
+              predicates:
+                - Path=/api/students/**
+
+
+
+jwt:
+  secret: 8f4c1f2d9ab4e6f7c8d9a0b1c2d3e4f56a7b8c9d0e1f2a3b4c5d6e7f8
